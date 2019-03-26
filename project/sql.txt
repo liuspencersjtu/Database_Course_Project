@@ -1,0 +1,97 @@
+create table passenger(
+  custom_id int,
+  dietary_restriction varchar(20),
+  seat_no int,
+  nationality varchar(20),
+  ticket_cost numeric(20),
+  gender varchar(20),
+ name varchar(20),
+ suitcase_number int(20),
+primary key(custom_id)
+
+);
+
+create table crew(
+crew_id int,
+pilot varchar(20),
+flight_attendant varchar(20),
+primary key(crew_id)
+);
+
+create table terminal(
+terminal_id int,
+gate varchar(20),
+part varchar(20),
+primary key(terminal_id)
+)
+
+
+create table aeroplane(
+plane_id int,
+Flight_no int,
+type int,
+maximum_volume int,
+primary key(plane_id)
+);
+
+create table Destination_Arrival_Location(
+airport_id int,
+airport_name varchar(20),
+Flight_no int,
+status_inbound_outbound varchar(20),
+state_province varchar(20),
+country varchar(20),
+name varchar(20),
+city varchar(20),
+primary key(airport_id)
+);
+
+create table flight_information(
+flight_no int,
+boarding_time varchar(20),
+departure_time varchar(20),
+gate int,
+status varchar(20),
+date varchar(20),
+
+
+
+flight_direction int,
+plane_information int,
+
+primary key(flight_no),
+
+foreign key(plane_information) references aeroplane(plane_id),
+foreign key(flight_direction) references Destination_Arrival_Location(airport_id),
+foreign key(gate) references terminal(terminal_id)
+
+);
+
+
+create table flight_crew(
+id int,
+crew_id int,
+flight_no int,
+primary key(id),
+foreign key(crew_id) references crew(crew_id),
+foreign key(flight_no) references flight_information(flight_no)
+);
+
+create table passenger_information(
+id int,
+custom_id int,
+flight_no int,
+primary key(id),
+foreign key(custom_id) references passenger(custom_id),
+foreign key(flight_no) references flight_information(flight_no)
+);
+
+
+create table airport_arrangement(
+id int,
+terminal_id int,
+flight_no int,
+primary key(id),
+foreign key(terminal_id) references terminal(terminal_id),
+foreign key(flight_no) references flight_information(flight_no)
+);
