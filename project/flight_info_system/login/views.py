@@ -22,3 +22,18 @@ def manager(request):
         password = request.POST.get('password')
         print(username, password)
     return render(request, 'manager.html')
+
+
+def passenger(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(username, password)
+    return render(request, 'passenger.html')
+
+def about(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(username, password)
+    return render(request, 'about.html')
