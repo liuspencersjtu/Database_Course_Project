@@ -63,9 +63,9 @@
             <ul class="navbar-nav mr-auto">
               
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0" method="post">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" id="key_word">
+              <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="return search_key_word()">Search</button>
             </form>
           </div>
         </nav>
@@ -74,15 +74,19 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Column heading</th>
-              <th scope="col">Column heading</th>
-              <th scope="col">Column heading</th>
+              <th scope="col">Flight No.</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Terminal</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="table_body">
             <tr class="table-active">
               <th scope="row">Active</th>
+              <td>Column content</td>
+              <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
@@ -92,9 +96,13 @@
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
             </tr>
             <tr class="table-primary">
               <th scope="row">Primary</th>
+              <td>Column content</td>
+              <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
@@ -104,9 +112,13 @@
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
             </tr>
             <tr class="table-success">
               <th scope="row">Success</th>
+              <td>Column content</td>
+              <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
@@ -116,9 +128,13 @@
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
             </tr>
             <tr class="table-warning">
               <th scope="row">Warning</th>
+              <td>Column content</td>
+              <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
@@ -128,15 +144,21 @@
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
             </tr>
             <tr class="table-light">
               <th scope="row">Light</th>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
             </tr>
             <tr class="table-dark">
               <th scope="row">Dark</th>
+              <td>Column content</td>
+              <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
@@ -153,6 +175,87 @@
 
 
       </div>
+
+      <script>
+        function search_key_word(){
+            
+           var keywordDiv=document.getElementById("key_word");
+           var keyword=keywordDiv.value.trim(); 
+           /*keyword 是需要传输的文本， 点击按钮执行这个程序，与后台进行交互*/
+           var word = {
+            "keyword":keyword
+           }
+
+
+           /*var table_body = $("#table_body");
+           var str = "<tr class=\"table-light\"><th scope=\"row\">"+"hello"+"</th><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+           table_body.append(str).trim();
+           alert("hello")*/
+
+           $.ajax(
+           {
+            type: "POST",
+            data: word,
+            success: function (data) {
+                    // 这里remove的时候需要remove两次才能够去掉一个节点。第一次显示是#text，第二次才是TR.
+                    //var table_body = document.getElementById("table_body");
+                    //var childs = table_body.childNodes;
+                    //var i = childs.length-1;
+                    //alert(childs[i].nodeName)
+                    //table_body.removeChild(childs[i]);
+                    //table_body.removeChild(table_body.childNodes[childs.length-1]);
+                    data = JSON.parse(data);
+                    var table_body = $("#table_body");
+                    var tr = $("#table_body>tr");
+                    tr.remove();
+                    var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
+                    //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["destination"]+"</th><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+                    table_body.append(str);
+                    alert("done");
+                },
+           })
+
+        }
+
+
+
+
+
+
+
+
+
+
+        //to support ajax
+        // using jQuery
+        /*function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+        function csrfSafeMethod(method) {
+            // 这些HTTP方法不要求CSRF包含
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });*/
+      </script>
 
 </body>
 </html>
