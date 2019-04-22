@@ -196,7 +196,7 @@
            {
             type: "POST",
             data: word,
-            success: function (data) {
+            success: function (res) {
                     // 这里remove的时候需要remove两次才能够去掉一个节点。第一次显示是#text，第二次才是TR.
                     //var table_body = document.getElementById("table_body");
                     //var childs = table_body.childNodes;
@@ -204,13 +204,18 @@
                     //alert(childs[i].nodeName)
                     //table_body.removeChild(childs[i]);
                     //table_body.removeChild(table_body.childNodes[childs.length-1]);
-                    data = JSON.parse(data);
+                    res = JSON.parse(res);
                     var table_body = $("#table_body");
                     var tr = $("#table_body>tr");
                     tr.remove();
-                    var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
+                    for (var data of res["records"]) {
+                      var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
+                      //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["destination"]+"</th><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+                      table_body.append(str);
+                    }
+                    //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
                     //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["destination"]+"</th><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
-                    table_body.append(str);
+                    //table_body.append(str);
                     alert("done");
                 },
            })

@@ -20,9 +20,24 @@ def home(request):
 
 def manager(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        print(username, password)
+        flight_no = request.POST.get('flight_no')
+        destination = request.POST.get('destination')
+        leaving_date = request.POST.get('leaving_date')
+        boarding_time = request.POST.get('boarding_time')
+        terminal = request.POST.get('terminal')
+        number_of_passengers = request.POST.get('number_of_passengers')
+        status = request.POST.get('status')
+        conn = sqlite3.connect('db.sqlite3')
+        cursor = conn.cursor()
+        print(type(flight_no), type(destination), type(leaving_date), type(boarding_time), type(terminal), type(number_of_passengers), type(status))
+        cursor.execute('insert into flight_info (flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status) values(\'{}\', \'{}\', \'{}\', \'{}\', \'{}\', {}, \'{}\' )'.format(flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status))
+        cursor.close()
+        conn.commit()
+        conn.close()
+        print(flight_no)
+        return HttpResponse(json.dumps({
+                'result':1,
+            }))
     return render(request, 'manager.html')
 
 
@@ -40,7 +55,27 @@ def passenger(request):
         cursor = conn.cursor()
         cursor.execute('select * from flight_info where destination = \'{}\''.format(keyword))
         values = cursor.fetchall()
-        values = values[0]
+        print(values)
+        res = []
+        for item in values:
+        	res.append({
+        		'flight_no':item[0],
+                'destination':item[1],
+                'leaving_date':item[2],
+                'boarding_time':item[3],
+                'terminal':item[4],
+                'number_of_passengers':item[5],
+                'status':item[6]
+        		})
+        #values = values[0]
+        cursor.close()
+        conn.commit()
+        conn.close()
+        return HttpResponse(json.dumps({
+                'result':1,
+                'records':res
+            }))
+        '''
         return HttpResponse(json.dumps({
                 'result':1,
                 'flight_no':values[0],
@@ -51,6 +86,7 @@ def passenger(request):
                 'number_of_passengers':values[5],
                 'status':values[6]
             }))
+        '''
     return render(request, 'passenger.html')
 
 def about(request):
