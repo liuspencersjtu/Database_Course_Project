@@ -30,7 +30,7 @@ def manager(request):
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
         print(type(flight_no), type(destination), type(leaving_date), type(boarding_time), type(terminal), type(number_of_passengers), type(status))
-        cursor.execute('insert into flight_info (flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status) values(\'{}\', \'{}\', \'{}\', \'{}\', \'{}\', {}, \'{}\' )'.format(flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status))
+        #cursor.execute('insert into flight_info (flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status) values(\'{}\', \'{}\', \'{}\', \'{}\', \'{}\', {}, \'{}\' )'.format(flight_no, destination, leaving_date, boarding_time, terminal, number_of_passengers, status))
         cursor.close()
         conn.commit()
         conn.close()
