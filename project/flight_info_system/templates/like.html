@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <!-- Bootstrap core CSS -->
+    <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body>
+    <!--h1 style="background-color: antiquewhite;color: black">Flight Info System</h1-->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+      <script src="https://code.jquery.com/jquery.js"></script>
+      <!-- 包括所有已编译的插件 -->
+      <script src="/static/js/bootstrap.min.js"></script>
+
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AirInfo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="http://127.0.0.1:8000/login/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/login/passenger">Passengers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/login/manager">Managers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-danger my-2 my-sm-0" type="button" onclick="return like_page()">Like!</button>
+          </form>
+        </div>
+      </nav>
+
+
+
+
+      <br/>
+      <br/>
+      <br/>
+      <div class="container">
+
+        <blockquote class="blockquote text-center">
+          <img src="http://ku.90sjimg.com/element_origin_min_pic/17/07/16/db3870b33b590b13d639ba0a7e359042.jpg" alt="Smiley face" height="420" width="420">
+
+        </blockquote>
+
+
+
+
+        <blockquote class="blockquote text-center">
+          <p class="mb-0">I remember years ago a guy I knew told me that people going to England find exactly what they go looking for.</p>
+          <footer class="blockquote-footer">Helene Hanff in <cite title="Source Title">'84, Charing Cross Road'</cite></footer>
+        </blockquote>
+
+
+
+      </div>
+
+
+      <script>
+        function like_page(){
+            
+
+
+           
+
+
+
+           $.ajax(
+           {
+            type: "POST",
+            //data: word,
+            success: function (data) {
+                    // 这里remove的时候需要remove两次才能够去掉一个节点。第一次显示是#text，第二次才是TR.
+                    //var table_body = document.getElementById("table_body");
+                    //var childs = table_body.childNodes;
+                    //var i = childs.length-1;
+                    //alert(childs[i].nodeName)
+                    //table_body.removeChild(childs[i]);
+                    //table_body.removeChild(table_body.childNodes[childs.length-1]);
+                    
+                },
+           })
+
+
+
+
+
+
+
+
+
+
+
+
+           /*
+           var column1 = $("#column1");
+           var column2 = $("#column2");
+           //var childs1 = column1.childNodes;
+           //var childs2 = column2.childNodes;
+           var str = `<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 20rem;\"><div class=\"card-header\">Terminal ${terminal}</div><div class=\"card-body\"><h4 class=\"card-title\">${destination}</h4><p class=\"card-text\">Flight No. ${flight_no}: Leave at ${boarding_time} ${leaving_date}, the total number of passenger is ${number_of_passengers}. Current status: ${status}.</p></div></div>`;
+           if (document.getElementById("column1").childNodes.length<=document.getElementById("column2").childNodes.length) {
+              column1.append(str);
+              column1.append("\n");
+           } else {
+             column2.append(str);
+             column2.append("\n"); 
+           }
+           */
+
+           /*
+           // adding a card
+           var column1 = $("#column1");
+           var str = "<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 20rem;\"><div class=\"card-header\">Terminal T1-A2</div><div class=\"card-body\"><h4 class=\"card-title\">New York</h4><p class=\"card-text\">Leave at 8:30pm, the total number of passenger is 500. Current status: delayed.</p></div></div>";
+           column1.append(str);
+           column1.append("\n");
+           */
+
+           /* 
+           //delete a card
+           var column1 = document.getElementById("column1");
+           var childs = column1.childNodes;
+           alert(childs[childs.length-1].nodeName);
+           column1.removeChild(childs[childs.length-1]);
+           column1.removeChild(childs[childs.length-1]);
+           alert("done!");
+           */
+           /*
+           var keywordDiv=document.getElementById("key_word");
+           var keyword=keywordDiv.value.trim(); 
+           var word = {
+            "keyword":keyword
+           }
+           */
+
+           /*var table_body = $("#table_body");
+           var str = "<tr class=\"table-light\"><th scope=\"row\">"+"hello"+"</th><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+           table_body.append(str).trim();
+           alert("hello")*/
+           /*
+           $.ajax(
+           {
+            type: "POST",
+            data: word,
+            success: function (data) {
+                    // 这里remove的时候需要remove两次才能够去掉一个节点。第一次显示是#text，第二次才是TR.
+                    //var table_body = document.getElementById("table_body");
+                    //var childs = table_body.childNodes;
+                    //var i = childs.length-1;
+                    //alert(childs[i].nodeName)
+                    //table_body.removeChild(childs[i]);
+                    //table_body.removeChild(table_body.childNodes[childs.length-1]);
+                    data = JSON.parse(data);
+                    var table_body = $("#table_body");
+                    var tr = $("#table_body>tr");
+                    tr.remove();
+                    var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
+                    //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["destination"]+"</th><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+                    table_body.append(str);
+                    alert("done");
+                },
+           })
+           */
+
+        }
+      </script>
+
+</body>
+</html>

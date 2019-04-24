@@ -17,7 +17,7 @@
 
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">AirInfo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -211,6 +211,11 @@
                     for (var data of res["records"]) {
                       var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
                       //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["destination"]+"</th><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td><td>Column content</td></tr>"
+                      if (data["status"]=="Canceled") {
+                        str = "<tr class=\"table-danger\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>";
+                      } else if (data["status"]=="Delayed") {
+                        str = "<tr class=\"table-warning\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>";
+                      }
                       table_body.append(str);
                     }
                     //var str = "<tr class=\"table-light\"><th scope=\"row\">"+data["flight_no"]+"</th><td>"+data["destination"]+"</td><td>"+data["leaving_date"]+"</td><td>"+data["boarding_time"]+"</td><td>"+data["terminal"]+"</td><td>"+data["status"]+"</td></tr>"
